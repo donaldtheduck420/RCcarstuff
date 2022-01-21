@@ -7,6 +7,9 @@ Servo steer;
 const double joyM = A5;
 const double joyS = A0;
 
+double motorVal;
+double steerVal;
+
 
 void setup() {
   Serial.begin(9600);
@@ -20,15 +23,23 @@ void loop() {
 
 
 
-  double motorVal = analogRead(joyM);
-  double steerVal = analogRead(joyS);
+  motorVal = analogRead(joyM);
+  steerVal = analogRead(joyS);
 
   motorVal = map(motorVal, 0, 1023, 10, 170);
   steerVal = map(steerVal, 0, 1023, 10, 170);
 
+  Serial.print("MOTOR is: ");
+  Serial.println(motorVal);
+
+  
+  Serial.print("STEERING is: ");
+  Serial.println(steerVal);
+
   motor.write(motorVal);
   steer.write(steerVal);
-   
 
+  delay(15);
+   
 
 }
